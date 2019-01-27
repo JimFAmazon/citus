@@ -7,68 +7,84 @@ jobs:
       - {checkout: {path: src}}
       - {run: {name: 'Configure, Build, and Install', command: build-ext}}
       - {persist_to_workspace: {root: ., paths: [.]}}
-  test-10/check-multi:
+  test-10/check-failure:
     docker:
-      - {image: 'jasonmp85/citus-exttester-10:0.0.1'}
+      - {image: 'jasonmp85/citus-failtester-10:0.0.1'}
     working_directory: /home/circleci/project
     steps:
       - {attach_workspace: {at: .}}
-      - {run: {name: 'Install and Test (check-multi)', command: 'install-and-test-ext check-multi'}}
-      - {run: {name: 'Format Results', command: 'cd /home/circleci/project/build-10/src/test/regress && format-results check-multi'}}
-      - {store_test_results: {path: '/home/circleci/project/build-10/src/test/regress/test-results.xml'}}
-  test-10/check-tt-van-mx:
+      - {run: {name: 'Install and Test (check-failure)', command: 'install-and-test-ext check-failure'}}
+  test-11/check-failure:
     docker:
-      - {image: 'jasonmp85/citus-exttester-10:0.0.1'}
+      - {image: 'jasonmp85/citus-failtester-11:0.0.1'}
     working_directory: /home/circleci/project
     steps:
       - {attach_workspace: {at: .}}
-      - {run: {name: 'Install and Test (check-tt-van-mx)', command: 'install-and-test-ext check-multi-task-tracker-extra check-vanilla check-multi-mx'}}
-      - {run: {name: 'Format Results', command: 'cd /home/circleci/project/build-10/src/test/regress && format-results 10/check-tt-van-mx'}}
-      - {store_test_results: {path: '/home/circleci/project/build-10/src/test/regress/test-results.xml'}}
-  test-10/check-iso-work-fol:
-    docker:
-      - {image: 'jasonmp85/citus-exttester-10:0.0.1'}
-    working_directory: /home/circleci/project
-    steps:
-      - {attach_workspace: {at: .}}
-      - {run: {name: 'Install and Test (check-iso-work-fol)', command: 'install-and-test-ext check-isolation check-worker'}}
-      - {run: {name: 'Format Results', command: 'cd /home/circleci/project/build-10/src/test/regress && format-results 10/check-iso-work-fol'}}
-      - {store_test_results: {path: '/home/circleci/project/build-10/src/test/regress/test-results.xml'}}
-  test-11/check-multi:
-    docker:
-      - {image: 'jasonmp85/citus-exttester-11:0.0.1'}
-    working_directory: /home/circleci/project
-    steps:
-      - {attach_workspace: {at: .}}
-      - {run: {name: 'Install and Test (check-multi)', command: 'install-and-test-ext check-multi'}}
-      - {run: {name: 'Format Results', command: 'cd /home/circleci/project/build-11/src/test/regress && format-results 11/check-multi'}}
-      - {store_test_results: {path: '/home/circleci/project/build-11/src/test/regress/test-results.xml'}}
-  test-11/check-tt-van-mx:
-    docker:
-      - {image: 'jasonmp85/citus-exttester-11:0.0.1'}
-    working_directory: /home/circleci/project
-    steps:
-      - {attach_workspace: {at: .}}
-      - {run: {name: 'Install and Test (check-tt-van-mx)', command: 'install-and-test-ext check-multi-task-tracker-extra check-vanilla check-multi-mx'}}
-      - {run: {name: 'Format Results', command: 'cd /home/circleci/project/build-11/src/test/regress && format-results 11/check-tt-van-mx'}}
-      - {store_test_results: {path: '/home/circleci/project/build-11/src/test/regress/test-results.xml'}}
-  test-11/check-iso-work-fol:
-    docker:
-      - {image: 'jasonmp85/citus-exttester-11:0.0.1'}
-    working_directory: /home/circleci/project
-    steps:
-      - {attach_workspace: {at: .}}
-      - {run: {name: 'Install and Test (check-iso-work-fol)', command: 'install-and-test-ext check-isolation check-worker'}}
-      - {run: {name: 'Format Results', command: 'cd /home/circleci/project/build-11/src/test/regress && format-results 11/check-iso-work-fol'}}
-      - {store_test_results: {path: '/home/circleci/project/build-11/src/test/regress/test-results.xml'}}
+      - {run: {name: 'Install and Test (check-failure)', command: 'install-and-test-ext check-failure'}}
+  # test-10/check-multi:
+  #   docker:
+  #     - {image: 'jasonmp85/citus-exttester-10:0.0.1'}
+  #   working_directory: /home/circleci/project
+  #   steps:
+  #     - {attach_workspace: {at: .}}
+  #     - {run: {name: 'Install and Test (check-multi)', command: 'install-and-test-ext check-multi'}}
+  #     - {run: {name: 'Format Results', command: 'cd /home/circleci/project/build-10/src/test/regress && format-results check-multi'}}
+  #     - {store_test_results: {path: '/home/circleci/project/build-10/src/test/regress/test-results.xml'}}
+  # test-10/check-tt-van-mx:
+  #   docker:
+  #     - {image: 'jasonmp85/citus-exttester-10:0.0.1'}
+  #   working_directory: /home/circleci/project
+  #   steps:
+  #     - {attach_workspace: {at: .}}
+  #     - {run: {name: 'Install and Test (check-tt-van-mx)', command: 'install-and-test-ext check-multi-task-tracker-extra check-vanilla check-multi-mx'}}
+  #     - {run: {name: 'Format Results', command: 'cd /home/circleci/project/build-10/src/test/regress && format-results 10/check-tt-van-mx'}}
+  #     - {store_test_results: {path: '/home/circleci/project/build-10/src/test/regress/test-results.xml'}}
+  # test-10/check-iso-work-fol:
+  #   docker:
+  #     - {image: 'jasonmp85/citus-exttester-10:0.0.1'}
+  #   working_directory: /home/circleci/project
+  #   steps:
+  #     - {attach_workspace: {at: .}}
+  #     - {run: {name: 'Install and Test (check-iso-work-fol)', command: 'install-and-test-ext check-isolation check-worker'}}
+  #     - {run: {name: 'Format Results', command: 'cd /home/circleci/project/build-10/src/test/regress && format-results 10/check-iso-work-fol'}}
+  #     - {store_test_results: {path: '/home/circleci/project/build-10/src/test/regress/test-results.xml'}}
+  # test-11/check-multi:
+  #   docker:
+  #     - {image: 'jasonmp85/citus-exttester-11:0.0.1'}
+  #   working_directory: /home/circleci/project
+  #   steps:
+  #     - {attach_workspace: {at: .}}
+  #     - {run: {name: 'Install and Test (check-multi)', command: 'install-and-test-ext check-multi'}}
+  #     - {run: {name: 'Format Results', command: 'cd /home/circleci/project/build-11/src/test/regress && format-results 11/check-multi'}}
+  #     - {store_test_results: {path: '/home/circleci/project/build-11/src/test/regress/test-results.xml'}}
+  # test-11/check-tt-van-mx:
+  #   docker:
+  #     - {image: 'jasonmp85/citus-exttester-11:0.0.1'}
+  #   working_directory: /home/circleci/project
+  #   steps:
+  #     - {attach_workspace: {at: .}}
+  #     - {run: {name: 'Install and Test (check-tt-van-mx)', command: 'install-and-test-ext check-multi-task-tracker-extra check-vanilla check-multi-mx'}}
+  #     - {run: {name: 'Format Results', command: 'cd /home/circleci/project/build-11/src/test/regress && format-results 11/check-tt-van-mx'}}
+  #     - {store_test_results: {path: '/home/circleci/project/build-11/src/test/regress/test-results.xml'}}
+  # test-11/check-iso-work-fol:
+  #   docker:
+  #     - {image: 'jasonmp85/citus-exttester-11:0.0.1'}
+  #   working_directory: /home/circleci/project
+  #   steps:
+  #     - {attach_workspace: {at: .}}
+  #     - {run: {name: 'Install and Test (check-iso-work-fol)', command: 'install-and-test-ext check-isolation check-worker'}}
+  #     - {run: {name: 'Format Results', command: 'cd /home/circleci/project/build-11/src/test/regress && format-results 11/check-iso-work-fol'}}
+  #     - {store_test_results: {path: '/home/circleci/project/build-11/src/test/regress/test-results.xml'}}
 workflows:
   version: 2
   build_and_test:
     jobs:
       - build
-      - {test-10/check-multi: {requires: [build]}}
-      - {test-10/check-tt-van-mx: {requires: [build]}}
-      - {test-10/check-iso-work-fol: {requires: [build]}}
-      - {test-11/check-multi: {requires: [build]}}
-      - {test-11/check-tt-van-mx: {requires: [build]}}
-      - {test-11/check-iso-work-fol: {requires: [build]}}
+      - {test-10/check-failure: {requires: [build]}}
+      - {test-11/check-failure: {requires: [build]}}
+      # - {test-10/check-multi: {requires: [build]}}
+      # - {test-10/check-tt-van-mx: {requires: [build]}}
+      # - {test-10/check-iso-work-fol: {requires: [build]}}
+      # - {test-11/check-multi: {requires: [build]}}
+      # - {test-11/check-tt-van-mx: {requires: [build]}}
+      # - {test-11/check-iso-work-fol: {requires: [build]}}
